@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get "/home", to: 'users#home'
   root "users#home"
   resources :posts, only: [:create]
+  resources :comments, only: [:create]
 end

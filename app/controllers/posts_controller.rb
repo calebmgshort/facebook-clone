@@ -1,10 +1,7 @@
 class PostsController < ApplicationController
   def create
-    if current_user.posts.create(post_params)
-      redirect_to params[:return_url]
-    else
-      raise "Failed to create post"
-    end
+    current_user.posts.create!(post_params)
+    redirect_to params[:return_url]
   end
 
   private

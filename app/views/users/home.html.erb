@@ -10,7 +10,19 @@
 <div>
   <% @posts.each do |post| %>
     <h3><%= post.email %></h3>
+    <!-- TODO(later): make this show only as precise as the minute, and use the correct timezone -->
     <h4><%= post.created_at %></h4>
     <p><%= post.text %></p>
+    <% post.comments.each do |comment| %>
+      <h5><%= comment.user.email%></h5>
+      <p><%= comment.text %></p>
+    <% end %>
+    <h4>Add new comment:</h4>
+    <%= form_for :comment, url: comments_path do |f| %>
+      <%= f.text_area :text %>
+      <%= f.hidden_field :post_id, :value => post.id %>
+      <%= hidden_field_tag 'return_url', request.original_url %>
+      <%= f.submit "Comment" %>
+    <% end %>
   <% end %>
 </div>
