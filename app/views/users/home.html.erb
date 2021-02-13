@@ -1,3 +1,5 @@
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
 <div>
   <h3>What's on your mind?</h3>
   <%= form_for :post, url: posts_path do |f| %>
@@ -25,4 +27,37 @@
       <%= f.submit "Comment" %>
     <% end %>
   <% end %>
+</div>
+
+<div>
+  <h3>Your friends</h3>
+  <ul>
+    <% current_user.friends.each do |friend| %>
+      <li>
+        <%= friend['friend_email'] %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <h3>Pending requests</h3>
+  <ul>
+    <% current_user.pending_friend_requests.each do |request| %>
+      <li>
+        <%= request['email'] %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <h3>Suggested friends</h3>
+  <ul>
+    <% current_user.suggested_friends.each do |suggestion| %>
+      <li>
+        <%= suggestion['email'] %>
+      </li>
+    <% end %>
+  </ul>
 </div>
