@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def pending_friend_requests
-    sql = "SELECT Friends.email
+    sql = "SELECT Friends.email, Friends.id
     FROM Users 
     JOIN User_Friend on (Users.id = requestee_id)
     JOIN Users as Friends on (Friends.id = requester_id)
@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   def suggested_friends
     # First, get all of the friends
-    sql = "SELECT email 
+    sql = "SELECT email, id
     FROM Users
     WHERE NOT EXISTS (
       SELECT 1 FROM ( " + basic_friends_query + " AND friend_id = Users.id ) as all_friends
