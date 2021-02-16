@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post "/user_friend/accept_friend", to: "user_friend#accept_friend"
   post "/user_friend/reject_friend", to: "user_friend#reject_friend"
   post "/user_friend/remove_friend", to: "user_friend#remove_friend"
+  resources :likes, only: [:create]
+  post "/likes/destroy", to: "likes#destroy"
 end
