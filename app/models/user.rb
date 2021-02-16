@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts
+  has_one_attached :avatar
 
   def friends
     sql = basic_friends_query + "

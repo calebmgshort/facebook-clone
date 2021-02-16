@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/profile", to: 'users#profile'
   get "/profile/:option", to: 'users#profile'
   patch "/profile/update_description", to: 'users#update_profile_description'
+  post "/profile/update_avatar", to: 'users#update_avatar'
   root "users#home"
   resources :posts, only: [:create]
   resources :comments, only: [:create]

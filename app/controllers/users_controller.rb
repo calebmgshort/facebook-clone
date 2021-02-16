@@ -15,4 +15,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_avatar
+    if current_user.avatar.attach(params[:avatar])
+      redirect_to '/profile'
+    else
+      render '/profile'
+    end
+  end
+
 end
