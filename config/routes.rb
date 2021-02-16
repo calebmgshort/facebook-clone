@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'posts/create'
   devise_for :users, controllers: { sessions: 'users/sessions' }
   get "/home", to: 'users#home'
+  get "/profile", to: 'users#profile'
+  get "/profile/:option", to: 'users#profile'
+  patch "/profile/update_description", to: 'users#update_profile_description'
   root "users#home"
   resources :posts, only: [:create]
   resources :comments, only: [:create]

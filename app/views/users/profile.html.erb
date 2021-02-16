@@ -1,0 +1,20 @@
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
+<h2><%= current_user.name %></h2>
+
+<h2>About Me</h2>
+<% if params[:option] == 'edit_description' %>
+<%= form_for current_user, url: "/profile/update_description" do |f| %>
+    <%= f.text_field :description %>
+    <%= f.submit "Update"%>
+  <% end %>
+<% else %>
+  <p><%= current_user.description %></p>
+  <%= form_with url: "/profile/edit_description", method: 'get' do |f| %>
+    <%= f.submit "Edit"%>
+  <% end %>
+<% end %>
+
+<%= render "feed" %>
+
+<%= render "friends" %>
