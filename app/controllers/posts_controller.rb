@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def create
-    current_user.posts.create!(post_params)
+    current_user.posts.create(post_params)
     redirect_to params[:return_url]
   end
 
