@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OdinFacebook</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OdinFacebook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,10 +11,38 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <h1>Facebook Clone</h1>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/home">
+        <h1>Facebook Clone</h1>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <% if user_signed_in? %>
+          <a class="navbar-item" href="/profile">
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar, size: "50"%>
+            <% else %>
+              <h1>Profile</h1>
+            <% end %>
+          </a>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "navbar-item" %>
+        <% else %>
+          <a class="navbar-item" href=<%= user_session_path %>>
+            <p>Sign in</p>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  <section class="section">
+    <div class="content">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+  </section>
+</body>
 </html>
