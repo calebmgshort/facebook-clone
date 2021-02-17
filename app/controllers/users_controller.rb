@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   def home
-    @posts = Post.joins(:user).select("posts.id as id", :text, :email, :created_at).order(created_at: :desc).where(user_id: current_user.id)    
+    @posts = current_user.own_and_friends_posts   
   end
 
   def profile
-    @posts = Post.joins(:user).select("posts.id as id", :text, :email, :created_at).order(created_at: :desc).where(user_id: current_user.id)  
+    @posts = current_user.own_posts
   end
 
   def update_profile_description

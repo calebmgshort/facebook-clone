@@ -7,6 +7,17 @@ class User < ApplicationRecord
   has_many :posts
   has_one_attached :avatar
 
+  def own_and_friends_posts
+    friend_ids = self.friends.map { |friend| friend['friend_id']} 
+    friend_ids << self.id
+    friend_ids_string = friend_ids.join(', ')
+    Post.joins(:user).select("posts.id as id", :text, :email, :created_at).order(created_at: :desc).where("users.id in ( #{friend_ids_string} )")  
+  end
+
+  def own_posts
+    Post.joins(:user).select("posts.id as id", :text, :email, :created_at).order(created_at: :desc).where(user_id: self.id)  
+  end
+
   def friends
     sql = basic_friends_query + "
     AND
