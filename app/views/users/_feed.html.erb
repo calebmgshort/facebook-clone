@@ -45,14 +45,22 @@
           <%= f.hidden_field :post_id, :value => post.id %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Like", class: "button is-info is-small" %>
+          <button class="button is-outlined" type="submit">
+            <span class="icon is-small">
+              <i class="fas fa-thumbs-up"></i>
+            </span>
+          </button>
         <% end %>
       <% else %> 
         <%= form_with url: '/likes/destroy' do |f| %>
           <%= f.hidden_field :post_id, :value => post.id %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Unlike", class: "button is-danger is-small" %>
+          <button class="button is-link" type="submit">
+            <span class="icon is-small">
+              <i class="fas fa-thumbs-up"></i>
+            </span>
+          </button>
         <% end %>
       <% end %>
     </div>
