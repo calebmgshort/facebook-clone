@@ -1,4 +1,4 @@
-<div>
+<div class="block">
   <h3>Your friends</h3>
   <ul>
     <% current_user.friends.each do |friend| %>
@@ -14,7 +14,7 @@
   </ul>
 </div>
 
-<div>
+<div class="block">
   <h3>Friend requests</h3>
   <ul>
     <% current_user.pending_friend_requests.each do |friend| %>
@@ -35,7 +35,7 @@
   </ul>
 </div>
 
-<div>
+<div class="block">
   <h3>Suggested friends</h3>
   <ul>
     <% current_user.suggested_friends.each do |suggestion| %>

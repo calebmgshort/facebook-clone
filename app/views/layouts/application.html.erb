@@ -12,7 +12,7 @@
   </head>
 
 <body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top">
     <div class="navbar-brand">
       <a class="navbar-item" href="/home">
         <h1>Facebook Clone</h1>
@@ -24,9 +24,8 @@
           <a class="navbar-item" href="/profile">
             <% if current_user.avatar.attached? %>
               <%= image_tag current_user.avatar, size: "50"%>
-            <% else %>
-              <h1>Profile</h1>
             <% end %>
+            <h1><%= current_user.name%></h1>
           </a>
           <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "navbar-item" %>
         <% else %>
@@ -37,12 +36,32 @@
       </div>
     </div>
   </nav>
-  <section class="section">
-    <div class="content">
+  <%= yield :top %>
+  <section class="section has-background-light">
+    <div class="container">
       <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </div>
+      <p class="alert"><%= alert %></p>   
+    </div> 
+    <section class='section'>
+      <div class="columns is-3">
+        <div class="column is-3">
+          <%= yield :friends %>
+        </div>
+        <div class="column is-6">
+          <%= yield %>
+        </div>
+      </div>
+    </section>
   </section>
+
+  <div>
+    <footer class="footer  has-background-light">
+      <div class="content has-text-centered">
+        <p>
+          something
+        </p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

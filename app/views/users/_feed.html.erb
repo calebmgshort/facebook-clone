@@ -1,5 +1,5 @@
 
-<div>
+<div class="box">
   <h3>What's on your mind?</h3>
   <%= form_for :post, url: posts_path do |f| %>
     <%= f.text_area :text %>
@@ -8,11 +8,28 @@
   <% end %>
 </div>
 
-<div>
-  <% @posts.each do |post| %>
+<% @posts.each do |post| %>
+  <div class="box">
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <% user = User.find(post.user_id) %>
+          <% if user.avatar.attached? %>
+            <%= image_tag user.avatar %>
+          <% end %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= post.user_name %></strong>
+            <br>
+            <small><%= post.created_at %></small>
+          </p>
+        </div>
+      </div>
+    </article>
 
-    <h3><%= post.email %></h3>
-    <h5><%= post.created_at %></h5>
     <p><%= post.text %></p>
 
     Likes: <%= Like.where(post_id: post.id).count %>
@@ -44,6 +61,5 @@
       <%= hidden_field_tag 'return_url', request.original_url %>
       <%= f.submit "Comment" %>
     <% end %>
-    
-  <% end %>
-</div>
+  </div>
+<% end %>
