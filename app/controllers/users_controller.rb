@@ -4,7 +4,13 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @posts = current_user.own_posts
+    if params.key?("id")
+      @user = User.find(params["id"])
+    else
+      @user = current_user
+    end
+    @posts = @user.own_posts
+
   end
 
   def update_profile_description

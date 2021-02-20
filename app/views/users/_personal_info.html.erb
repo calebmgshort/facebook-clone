@@ -1,36 +1,42 @@
 <section class="section has-text-centered">
   <div class="container is-max-desktop">
     <div class="block">
-      <% if current_user.avatar.attached? %>
-        <%= image_tag current_user.avatar, size: "300"%>
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, size: "300"%>
       <% end %>
-      <% if params[:option] == 'edit_avatar' %>
-        <%= form_with url: "/profile/update_avatar" do |f| %>
-          <%= f.file_field :avatar, accept: "image/*" %><br>
-          <%= f.submit "Submit"%>
-        <% end %>
-      <% else %>
-        <%= form_with url: "/profile/edit_avatar", method: 'get' do |f| %>
-          <%= f.submit "Edit Profile Photo", class: "button is-small"%>
+      <% if @user == current_user %>
+        <% if params[:option] == 'edit_avatar' %>
+          <%= form_with url: "/profile/update_avatar" do |f| %>
+            <%= f.file_field :avatar, accept: "image/*" %><br>
+            <%= f.submit "Submit"%>
+          <% end %>
+        <% else %>
+          <%= form_with url: "/profile/edit_avatar", method: 'get' do |f| %>
+            <%= f.submit "Edit Profile Photo", class: "button is-small"%>
+          <% end %>
         <% end %>
       <% end %>
     </div>
     <div class="block">
       <div class="content">
-        <h1><%= current_user.name %></h1>
+        <h1><%= @user.name %></h1>
       </div>
     </div>
     <div class="block">
-      <% if params[:option] == 'edit_description' %>
-        <%= form_for current_user, url: "/profile/update_description" do |f| %>
-          <%= f.text_area :description, class: "textarea"  %>
-          <%= f.submit "Update"%>
+      <% if @user == current_user %>
+        <% if params[:option] == 'edit_description' %>
+          <%= form_for current_user, url: "/profile/update_description" do |f| %>
+            <%= f.text_area :description, class: "textarea"  %>
+            <%= f.submit "Update"%>
+          <% end %>
+        <% else %>
+          <p><%= @current_user.description %></p>
+          <%= form_with url: "/profile/edit_description", method: 'get' do |f| %>
+            <%= f.submit "Edit Profile Description", class: "button is-small"%>
+          <% end %>
         <% end %>
       <% else %>
-        <p><%= current_user.description %></p>
-        <%= form_with url: "/profile/edit_description", method: 'get' do |f| %>
-          <%= f.submit "Edit Profile Description", class: "button is-small"%>
-        <% end %>
+        <p><%= @user.description %></p>
       <% end %>
     </div>
   </div>

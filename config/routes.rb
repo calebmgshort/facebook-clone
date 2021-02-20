@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
   get "/home", to: 'users#home'
   get "/profile", to: 'users#profile'
+  get "/users/:id/profile", to: 'users#profile'
   get "/profile/:option", to: 'users#profile'
   patch "/profile/update_description", to: 'users#update_profile_description'
   post "/profile/update_avatar", to: 'users#update_avatar'
