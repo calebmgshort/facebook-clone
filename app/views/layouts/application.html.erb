@@ -17,31 +17,43 @@
       <div class="block">
         <nav class="navbar is-fixed-top has-background-white">
           <div class="navbar-brand">
-            <a class="navbar-item" href="/home">
-              <h1>Facebook Clone</h1>
-            </a>
+            <div class="navbar-item">
+              <%= link_to "/home", class: "button is-info" do %>
+                Facebook Clone
+              <% end %>
+            </div>
           </div>
           <div class="navbar-menu">
             <div class="navbar-start">
-              <a class="navbar-item" href="/home">
-                <span class="icon has-text-info is-large">
-                  <i class="fas fa-home"></i>
-                </span>
-              </a>
+              <div class="navbar-item">
+                <%= link_to "/home", class: "button is-light" do %>
+                  <span class="icon has-text-info is-large">
+                    <i class="fas fa-home"></i>
+                  </span>
+                <% end %>
+              </div>
             </div>
             <div class="navbar-end">
               <% if user_signed_in? %>
-                <a class="navbar-item" href="/profile">
-                  <% if current_user.avatar.attached? %>
-                    <%= image_tag current_user.avatar, size: "50"%>
+                <div class="navbar-item">
+                  <%= link_to "/profile", class: "button is-light" do %>
+                    <% if current_user.avatar.attached? %>
+                      <%= image_tag current_user.avatar, size: "50"%>
+                    <% end %>
+                    <%= current_user.name%>
                   <% end %>
-                  <h1><%= current_user.name%></h1>
-                </a>
-                <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "navbar-item" %>
+                </div>
+                <div class="navbar-item">
+                  <%= link_to destroy_user_session_path, :method => :delete, class: "button is-light" do %>
+                    Sign out
+                  <% end %>
+                </div>
               <% else %>
-                <a class="navbar-item" href=<%= user_session_path %>>
-                  <p>Sign in</p>
-                </a>
+                <div class="navbar-item">
+                  <%= link_to user_session_path, class: "button is-light" do %>
+                    Sign in
+                  <% end %>
+                </div>
               <% end %>
             </div>
           </div>
@@ -69,11 +81,11 @@
       <div>
         <footer class="footer has-background-light">
           <div class="content has-text-centered">
-            <button class="button is-large" onclick="location.href='https://github.com/calebmgshort/facebook-clone'">
+            <%= link_to "https://github.com/calebmgshort/facebook-clone", class: "button is-large" do %>
               <span class="icon">
                 <i class="fab fa-github"></i>
               </span>
-            </button>
+            <% end %>
           </div>
         </footer>
       </div>
