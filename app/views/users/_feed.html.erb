@@ -1,10 +1,12 @@
 
 <div class="box">
-  <h3>What's on your mind?</h3>
   <%= form_for :post, url: posts_path do |f| %>
-    <%= f.text_area :text %>
+    <div class="field">
+      <label class="label">What's on your mind?</label>
+      <%= f.text_area :text, class: "textarea", placeholder: "Your awesome thoughts..."%>
+    </div>
     <%= hidden_field_tag 'return_url', request.original_url %>
-    <%= f.submit "Post" %>
+    <%= f.submit "Post",  class: "button is-link" %>
   <% end %>
 </div>
 
