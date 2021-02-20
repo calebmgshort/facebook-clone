@@ -16,18 +16,19 @@
           </p>
         </figure>
         <div class="media-content">
-          <div class="content">
-            <%= friend.name %>
-          </div>
+            <div class="content">
+              <%= friend.name %>
+            </div>
         </div>
-        <div class="media-content">
-          <div class="content">
-            <%= form_with url: '/user_friend/remove_friend' do |f| %>
-              <%= f.hidden_field :friend_id, :value => friend.id %>
-              <%= hidden_field_tag 'return_url', request.original_url %>
-              <%= f.submit "Unfriend", class: "button is-danger is-small"%>
-            <% end %>
-          </div>
+        <div class="media-right">
+          <div class="media-content">
+            <div class="content">
+              <%= form_with url: '/user_friend/remove_friend' do |f| %>
+                <%= f.hidden_field :friend_id, :value => friend.id %>
+                <%= hidden_field_tag 'return_url', request.original_url %>
+                <%= f.submit "Unfriend", class: "button is-danger is-small"%>
+              <% end %>
+            </div>
         </div>
       </article> 
     </div>
@@ -56,22 +57,22 @@
             <%= friend.name %>
           </div>
         </div>
-        <div class="media-content">
-          <div class="content">
-            <%= form_for :user_friend, url: '/user_friend/accept_friend' do |f| %>
-              <%= f.hidden_field :requester_id, :value => friend.id %>
-              <%= hidden_field_tag 'return_url', request.original_url %>
-              <%= f.submit "Accept", class: "button is-success is-small" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <%= form_for :user_friend, url: '/user_friend/reject_friend' do |f| %>
-              <%= f.hidden_field :requester_id, :value => friend.id %>
-              <%= hidden_field_tag 'return_url', request.original_url %>
-              <%= f.submit "Reject", class: "button is-danger is-small" %>
-            <% end %>
+        <div class="media-right">
+          <div class="media-content">
+            <div class="content">
+              <%= form_for :user_friend, url: '/user_friend/accept_friend' do |f| %>
+                <%= f.hidden_field :requester_id, :value => friend.id %>
+                <%= hidden_field_tag 'return_url', request.original_url %>
+                <%= f.submit "Accept", class: "button is-success is-small" %>
+              <% end %>
+            </div>
+            <div class="content">
+              <%= form_for :user_friend, url: '/user_friend/reject_friend' do |f| %>
+                <%= f.hidden_field :requester_id, :value => friend.id %>
+                <%= hidden_field_tag 'return_url', request.original_url %>
+                <%= f.submit "Reject", class: "button is-danger is-small" %>
+              <% end %>
+            </div>
           </div>
         </div>
       </article> 
@@ -102,13 +103,15 @@
             <%= friend.name %>
           </div>
         </div>
-        <div class="media-content">
-          <div class="content">
-            <%= form_for :user_friend, url: '/user_friend/request_friend' do |f| %>
-              <%= f.hidden_field :requestee_id, :value => friend.id %>
-              <%= hidden_field_tag 'return_url', request.original_url %>
-              <%= f.submit "Request friend", class: "button is-info is-small" %>
-            <% end %>
+        <div class="media-right">
+          <div class="media-content">
+            <div class="content">
+              <%= form_for :user_friend, url: '/user_friend/request_friend' do |f| %>
+                <%= f.hidden_field :requestee_id, :value => friend.id %>
+                <%= hidden_field_tag 'return_url', request.original_url %>
+                <%= f.submit "Request friend", class: "button is-info is-small" %>
+              <% end %>
+            </div>
           </div>
         </div>
       </article> 
