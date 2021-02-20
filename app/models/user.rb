@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_one_attached :avatar
+  validates :name, presence: true
 
   def own_and_friends_posts
     friend_ids = self.friends.map { |friend| friend['friend_id']} 

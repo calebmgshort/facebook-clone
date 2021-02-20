@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   patch "/profile/update_description", to: 'users#update_profile_description'
   post "/profile/update_avatar", to: 'users#update_avatar'
   root "users#home"
-  resources :posts, only: [:create]
+  resources :posts, only: [:create, :destroy]
   resources :comments, only: [:create]
   post "/user_friend/request_friend", to: "user_friend#request_friend"
   post "/user_friend/accept_friend", to: "user_friend#accept_friend"
