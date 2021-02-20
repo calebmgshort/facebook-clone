@@ -12,66 +12,71 @@
     <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   </head>
 
-<body>
-  <nav class="navbar is-fixed-top">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/home">
-        <h1>Facebook Clone</h1>
-      </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/home">
-          <span class="icon has-text-info is-large">
-            <i class="fas fa-home"></i>
-          </span>
-        </a>
+  <body>
+    <section class="section has-background-light">
+      <div class="block">
+        <nav class="navbar is-fixed-top has-background-white">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/home">
+              <h1>Facebook Clone</h1>
+            </a>
+          </div>
+          <div class="navbar-menu">
+            <div class="navbar-start">
+              <a class="navbar-item" href="/home">
+                <span class="icon has-text-info is-large">
+                  <i class="fas fa-home"></i>
+                </span>
+              </a>
+            </div>
+            <div class="navbar-end">
+              <% if user_signed_in? %>
+                <a class="navbar-item" href="/profile">
+                  <% if current_user.avatar.attached? %>
+                    <%= image_tag current_user.avatar, size: "50"%>
+                  <% end %>
+                  <h1><%= current_user.name%></h1>
+                </a>
+                <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "navbar-item" %>
+              <% else %>
+                <a class="navbar-item" href=<%= user_session_path %>>
+                  <p>Sign in</p>
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </nav>
       </div>
-      <div class="navbar-end">
-        <% if user_signed_in? %>
-          <a class="navbar-item" href="/profile">
-            <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar, size: "50"%>
-            <% end %>
-            <h1><%= current_user.name%></h1>
-          </a>
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "navbar-item" %>
-        <% else %>
-          <a class="navbar-item" href=<%= user_session_path %>>
-            <p>Sign in</p>
-          </a>
-        <% end %>
-      </div>
-    </div>
-  </nav>
-  <%= yield :top %>
-  <section class="section has-background-light">
-    <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>   
-    </div> 
-    <section class='section'>
-      <div class="columns is-3">
-        <div class="column is-3">
-          <%= yield :friends %>
+
+      <div class="content has-text-centered">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>   
+      </div> 
+
+      <%= yield :top %>
+
+      <section class='section'>
+        <div class="columns is-3">
+          <div class="column is-3">
+            <%= yield :friends %>
+          </div>
+          <div class="column is-6">
+            <%= yield %>
+          </div>
         </div>
-        <div class="column is-6">
-          <%= yield %>
-        </div>
+      </section>
+
+      <div>
+        <footer class="footer has-background-light">
+          <div class="content has-text-centered">
+            <button class="button is-large" onclick="location.href='https://github.com/calebmgshort/facebook-clone'">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+            </button>
+          </div>
+        </footer>
       </div>
     </section>
-  </section>
-
-  <div>
-    <footer class="footer  has-background-light">
-      <div class="content has-text-centered">
-        <button class="button is-large" onclick="location.href='https://github.com/calebmgshort/facebook-clone'">
-          <span class="icon">
-            <i class="fab fa-github"></i>
-          </span>
-        </button>
-      </div>
-    </footer>
-  </div>
-</body>
+  </body>
 </html>

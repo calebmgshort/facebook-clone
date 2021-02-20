@@ -1,4 +1,4 @@
-<section class="section has-background-white-bis has-text-centered">
+<div class="block has-text-centered">
   <div class="block">
     <% if current_user.avatar.attached? %>
       <%= image_tag current_user.avatar, size: "300"%>
@@ -10,13 +10,16 @@
       <% end %>
     <% else %>
       <%= form_with url: "/profile/edit_avatar", method: 'get' do |f| %>
-        <%= f.submit "Edit Profile Photo"%>
+        <%= f.submit "Edit Profile Photo", class: "button is-small"%>
       <% end %>
     <% end %>
-
-    <h2><%= current_user.name %></h2>
-
-    <h2>About Me</h2>
+  </div>
+  <div class="block">
+    <div class="content">
+      <h1><%= current_user.name %></h1>
+    </div>
+  </div>
+  <div class="block">
     <% if params[:option] == 'edit_description' %>
       <%= form_for current_user, url: "/profile/update_description" do |f| %>
         <%= f.text_field :description %>
@@ -29,4 +32,4 @@
       <% end %>
     <% end %>
   </div>
-</section>
+</div>
