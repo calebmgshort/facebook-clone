@@ -1,52 +1,117 @@
 <div class="block">
-  <h3>Your friends</h3>
-  <ul>
-    <% current_user.friends.each do |friend| %>
-      <li>
-        <%= friend['friend_email'] %>
-        <%= form_with url: '/user_friend/remove_friend' do |f| %>
-          <%= f.hidden_field :friend_id, :value => friend['friend_id'] %>
-          <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Unfriend" %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="block">
+    <strong>Your friends</strong>
+  </div>
+  <% current_user.friends.each do |friend| %>
+    <% friend = User.find(friend['friend_id'])%>
+    <div class="block">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+            <% if friend.avatar.attached? %>
+              <%= image_tag friend.avatar %>
+            <% else %>
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <% end %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <%= friend.name %>
+          </div>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <%= form_with url: '/user_friend/remove_friend' do |f| %>
+              <%= f.hidden_field :friend_id, :value => friend.id %>
+              <%= hidden_field_tag 'return_url', request.original_url %>
+              <%= f.submit "Unfriend", class: "button is-danger is-small"%>
+            <% end %>
+          </div>
+        </div>
+      </article> 
+    </div>
+  <% end %>
 </div>
 
 <div class="block">
-  <h3>Friend requests</h3>
-  <ul>
-    <% current_user.pending_friend_requests.each do |friend| %>
-      <li>
-        <%= friend['email'] %>
-        <%= form_for :user_friend, url: '/user_friend/accept_friend' do |f| %>
-          <%= f.hidden_field :requester_id, :value => friend['id'] %>
-          <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Accept" %>
-        <% end %>
-        <%= form_for :user_friend, url: '/user_friend/reject_friend' do |f| %>
-          <%= f.hidden_field :requester_id, :value => friend['id'] %>
-          <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Reject" %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="block">
+    <strong>Friend requests</strong>
+  </div>
+  <% current_user.pending_friend_requests.each do |friend| %>
+    <% friend = User.find(friend['id'])%>
+    <div class="block">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+            <% if friend.avatar.attached? %>
+              <%= image_tag friend.avatar %>
+            <% else %>
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <% end %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <%= friend.name %>
+          </div>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <%= form_for :user_friend, url: '/user_friend/accept_friend' do |f| %>
+              <%= f.hidden_field :requester_id, :value => friend.id %>
+              <%= hidden_field_tag 'return_url', request.original_url %>
+              <%= f.submit "Accept", class: "button is-success is-small" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <%= form_for :user_friend, url: '/user_friend/reject_friend' do |f| %>
+              <%= f.hidden_field :requester_id, :value => friend.id %>
+              <%= hidden_field_tag 'return_url', request.original_url %>
+              <%= f.submit "Reject", class: "button is-danger is-small" %>
+            <% end %>
+          </div>
+        </div>
+      </article> 
+    </div>
+  <% end %>
 </div>
 
 <div class="block">
-  <h3>Suggested friends</h3>
-  <ul>
-    <% current_user.suggested_friends.each do |suggestion| %>
-      <li>
-        <%= suggestion['email'] %>
-        <%= form_for :user_friend, url: '/user_friend/request_friend' do |f| %>
-          <%= f.hidden_field :requestee_id, :value => suggestion['id'] %>
-          <%= hidden_field_tag 'return_url', request.original_url %>
-          <%= f.submit "Request friend" %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="block">
+    <strong>Suggested friends</strong>
+  </div>
+  
+  <% current_user.suggested_friends.each do |friend| %>
+    <% friend = User.find(friend['id'])%>
+    <div class="block">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+            <% if friend.avatar.attached? %>
+              <%= image_tag friend.avatar %>
+            <% else %>
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <% end %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <%= friend.name %>
+          </div>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <%= form_for :user_friend, url: '/user_friend/request_friend' do |f| %>
+              <%= f.hidden_field :requestee_id, :value => friend.id %>
+              <%= hidden_field_tag 'return_url', request.original_url %>
+              <%= f.submit "Request friend", class: "button is-info is-small" %>
+            <% end %>
+          </div>
+        </div>
+      </article> 
+    </div>
+  <% end %>
 </div>

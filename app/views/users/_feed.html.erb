@@ -83,12 +83,27 @@
       </div>
     <% end %>
 
-    <%= form_for :comment, url: comments_path do |f| %>
-      <div class="field">
-        <%= f.text_field :text, class: "input", type: "text", placeholder: "Write a comment..."%>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-48x48">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar %>
+          <% else %>
+            <img src="https://bulma.io/images/placeholders/128x128.png">
+          <% end %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <%= form_for :comment, url: comments_path do |f| %>
+            <div class="field">
+              <%= f.text_field :text, class: "input", type: "text", placeholder: "Write a comment..."%>
+            </div>
+            <%= f.hidden_field :post_id, :value => post.id %>
+            <%= hidden_field_tag 'return_url', request.original_url %>
+          <% end %>
+        </div>
       </div>
-      <%= f.hidden_field :post_id, :value => post.id %>
-      <%= hidden_field_tag 'return_url', request.original_url %>
-    <% end %>
+    </article> 
   </div>
 <% end %>
