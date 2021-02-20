@@ -8,7 +8,10 @@
         <% if params[:option] == 'edit_avatar' %>
           <%= form_with url: "/profile/update_avatar" do |f| %>
             <%= f.file_field :avatar, accept: "image/*" %><br>
-            <%= f.submit "Submit"%>
+            <%= f.submit "Submit", class: "button is-small"%>
+            <%= link_to "/profile", class: "button is-small" do %>
+              Cancel
+            <% end %>
           <% end %>
         <% else %>
           <%= form_with url: "/profile/edit_avatar", method: 'get' do |f| %>
@@ -27,7 +30,10 @@
         <% if params[:option] == 'edit_description' %>
           <%= form_for @user, url: "/profile/update_description" do |f| %>
             <%= f.text_area :description, class: "textarea"  %>
-            <%= f.submit "Update"%>
+            <%= f.submit "Update", class: "button is-small"%>
+            <%= link_to "/profile", class: "button is-small" do %>
+              Cancel
+            <% end %>
           <% end %>
         <% else %>
           <p><%= @user.description %></p>
