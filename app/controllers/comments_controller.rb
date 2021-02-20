@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     validated_params = comment_params
     validated_params[:user_id] = current_user.id
     Comment.create(validated_params)
-    redirect_to params[:return_url]
+    redirect_back fallback_location: params[:return_url]
   end
 
   private

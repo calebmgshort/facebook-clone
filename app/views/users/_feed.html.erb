@@ -18,6 +18,8 @@
           <% user = User.find(post.user_id) %>
           <% if user.avatar.attached? %>
             <%= image_tag user.avatar %>
+          <% else %>
+            <img src="https://bulma.io/images/placeholders/128x128.png">
           <% end %>
         </p>
       </figure>
@@ -32,36 +34,61 @@
       </div>
     </article>
 
-    <p><%= post.text %></p>
+    <div class="block">
+      <p><%= post.text %></p>
+    </div>
 
-    Likes: <%= Like.where(post_id: post.id).count %>
-    <% if Like.find_by(post_id: post.id, user_id: current_user.id).blank? %>
-      <%= form_for :like, url: likes_path do |f| %>
-        <%= f.hidden_field :post_id, :value => post.id %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= hidden_field_tag 'return_url', request.original_url %>
-        <%= f.submit "Like" %>
+    <div class="block">
+      Likes: <%= Like.where(post_id: post.id).count %>
+      <% if Like.find_by(post_id: post.id, user_id: current_user.id).blank? %>
+        <%= form_for :like, url: likes_path do |f| %>
+          <%= f.hidden_field :post_id, :value => post.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= hidden_field_tag 'return_url', request.original_url %>
+          <%= f.submit "Like", class: "button is-info is-small" %>
+        <% end %>
+      <% else %> 
+        <%= form_with url: '/likes/destroy' do |f| %>
+          <%= f.hidden_field :post_id, :value => post.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= hidden_field_tag 'return_url', request.original_url %>
+          <%= f.submit "Unlike", class: "button is-danger is-small" %>
+        <% end %>
       <% end %>
-    <% else %> 
-      <%= form_with url: '/likes/destroy' do |f| %>
-        <%= f.hidden_field :post_id, :value => post.id %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= hidden_field_tag 'return_url', request.original_url %>
-        <%= f.submit "Unlike" %>
-      <% end %>
-    <% end %>
+    </div>
 
     <% post.comments.each do |comment| %>
-      <h5><%= comment.user.email%></h5>
-      <p><%= comment.text %></p>
+      <% comment_user = comment.user %>
+      <div class="block">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-32x32">
+              <% if comment_user.avatar.attached? %>
+                <%= image_tag comment_user.avatar %>
+              <% else %>
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+              <% end %>
+            </p>
+          </figure>
+          <div class="media-content has-background-grey-lighter">
+            <div class="content">
+              <p>
+                <strong><%= comment_user.name %></strong>
+                <br>
+                <%= comment.text %>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
     <% end %>
 
-    <h4>Add new comment:</h4>
     <%= form_for :comment, url: comments_path do |f| %>
-      <%= f.text_area :text %>
+      <div class="field">
+        <%= f.text_field :text, class: "input", type: "text", placeholder: "Write a comment..."%>
+      </div>
       <%= f.hidden_field :post_id, :value => post.id %>
       <%= hidden_field_tag 'return_url', request.original_url %>
-      <%= f.submit "Comment" %>
     <% end %>
   </div>
 <% end %>
