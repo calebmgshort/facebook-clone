@@ -16,9 +16,9 @@
           </p>
         </figure>
         <div class="media-content">
-            <div class="content">
-              <%= friend.name %>
-            </div>
+          <%= link_to "/users/#{friend.id}/profile", class: "button is-light" do %>
+            <%= limit_string(friend.name) %>
+          <% end %>
         </div>
         <div class="media-right">
           <div class="media-content">
@@ -53,9 +53,9 @@
           </p>
         </figure>
         <div class="media-content">
-          <div class="content">
-            <%= friend.name %>
-          </div>
+          <%= link_to "/users/#{friend.id}/profile", class: "button is-light" do %>
+            <%= limit_string(friend.name) %>
+          <% end %>
         </div>
         <div class="media-right">
           <div class="media-content">
@@ -99,9 +99,9 @@
           </p>
         </figure>
         <div class="media-content">
-          <div class="content">
-            <%= friend.name %>
-          </div>
+          <%= link_to "/users/#{friend.id}/profile", class: "button is-light" do %>
+            <%= limit_string(friend.name, 12) %>
+          <% end %>
         </div>
         <div class="media-right">
           <div class="media-content">

@@ -1,15 +1,15 @@
 
 <% if @user == current_user %>
-<div class="box">
-  <%= form_for :post, url: posts_path do |f| %>
-    <div class="field">
-      <label class="label">What's on your mind?</label>
-      <%= f.text_area :text, class: "textarea", placeholder: "Your awesome thoughts..."%>
-    </div>
-    <%= hidden_field_tag 'return_url', request.original_url %>
-    <%= f.submit "Post",  class: "button is-link" %>
-  <% end %>
-</div>
+  <div class="box">
+    <%= form_for :post, url: posts_path do |f| %>
+      <div class="field">
+        <label class="label">What's on your mind?</label>
+        <%= f.text_area :text, class: "textarea", placeholder: "Your awesome thoughts..."%>
+      </div>
+      <%= hidden_field_tag 'return_url', request.original_url %>
+      <%= f.submit "Post",  class: "button is-link" %>
+    <% end %>
+  </div>
 <% end %>
 
 <% @posts.each do |post| %>
@@ -28,7 +28,9 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong><%= post.user_name %></strong>
+            <%= link_to "/users/#{post.user_id}/profile", class: "content has-text-black" do %>
+              <strong><%= post.user_name %></strong>
+            <% end %>
             <br>
             <small><%= post.created_at %></small>
           </p>

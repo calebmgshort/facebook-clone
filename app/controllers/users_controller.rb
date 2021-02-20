@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   def home
-    @posts = current_user.own_and_friends_posts   
+    if params.key?("id")
+      @user = User.find(params["id"])
+    else
+      @user = current_user
+    end
+    @posts = @user.own_and_friends_posts   
   end
 
   def profile

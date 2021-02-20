@@ -25,12 +25,12 @@
     <div class="block">
       <% if @user == current_user %>
         <% if params[:option] == 'edit_description' %>
-          <%= form_for current_user, url: "/profile/update_description" do |f| %>
+          <%= form_for @user, url: "/profile/update_description" do |f| %>
             <%= f.text_area :description, class: "textarea"  %>
             <%= f.submit "Update"%>
           <% end %>
         <% else %>
-          <p><%= @current_user.description %></p>
+          <p><%= @user.description %></p>
           <%= form_with url: "/profile/edit_description", method: 'get' do |f| %>
             <%= f.submit "Edit Profile Description", class: "button is-small"%>
           <% end %>
