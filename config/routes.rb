@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post "/profile/update_avatar", to: 'users#update_avatar'
   root "users#home"
   resources :posts, only: [:create, :destroy]
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :destroy]
   post "/user_friend/request_friend", to: "user_friend#request_friend"
   post "/user_friend/accept_friend", to: "user_friend#accept_friend"
   post "/user_friend/reject_friend", to: "user_friend#reject_friend"
