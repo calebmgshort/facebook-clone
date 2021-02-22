@@ -3,6 +3,8 @@
     <div class="block">
       <% if @user.avatar.attached? %>
         <%= image_tag @user.avatar, size: "300"%>
+      <% else %>
+        <img src="https://versions.bulma.io/0.7.0/images/placeholders/128x128.png", size="300">
       <% end %>
       <% if @user == current_user %>
         <% if params[:option] == 'edit_avatar' %>
