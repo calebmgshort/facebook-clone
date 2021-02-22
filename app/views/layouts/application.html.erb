@@ -9,7 +9,6 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   </head>
 
   <body>
@@ -61,8 +60,8 @@
       </div>
 
       <div class="content has-text-centered">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>   
+        <p class="notice has-text-success"><%= notice %></p>
+        <p class="alert has-text-danger	"><%= alert %></p>   
       </div> 
 
       <%= yield :top %>

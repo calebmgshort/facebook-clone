@@ -27,6 +27,7 @@ class UserFriendController < ApplicationController
     friend_id = params['friend_id']
     user_id = current_user.id
     UserFriend.remove_friend(user_id, friend_id)
+    flash[:notice] = "Friend removed"
     redirect_to params[:return_url]
   end
 
