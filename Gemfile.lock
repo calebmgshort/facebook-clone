@@ -113,6 +113,7 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.3)
     msgpack (1.4.2)
+    newrelic_rpm (6.15.0)
     nio4r (2.5.5)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
@@ -232,6 +233,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.15.1)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  newrelic_rpm
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
