@@ -5,3 +5,5 @@ The deployed website is here:
 https://odinfacebookclone.herokuapp.com/home
 The project description is here:
 https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project
+
+![](facebookclone.jpg)
